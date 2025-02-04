@@ -1,13 +1,10 @@
 import json
 
-def extract_jb_seq():
-
+def extract_jb_seq(file_path, attribute="prompt"):
     # Load the JSON file
-    file_path = "data/jbbench.json"
-
     with open(file_path, "r") as file:
         data = json.load(file)
 
     # Extract the "goal" field from each element in the "jailbreaks" array
-    goals = [jb["goal"] for jb in data["jailbreaks"]]
-    return goals
+    strings = [jb[attribute] for jb in data["jailbreaks"] if jb[attribute] is not None]
+    return strings
