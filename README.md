@@ -7,25 +7,29 @@ A framework for enhancing language model robustness by generating defensive stra
 
 ```bash
 pip install -r requirements.txt
-
-🚀 Usage
+```
+## 🚀 Usage
 Running Experiments
 
 To execute different attack strategies on ChatGPT 4o:
 
 # Random Search Attack (arxiv.org/abs/2404.02151)
+```bash
 python prompt_gpt.py "gpt-4-rs"
-
+```
 # PAIR Attack (arxiv.org/abs/2310.08419)
+```bash
 python prompt_gpt.py "gpt-4-pair"
-
+```
 # JBC Attack (ww1.jailbreakchat.com)
+```bash
 python prompt_gpt.py "gpt-4-jbc"
-
+```
 # GCG Attack (arxiv.org/abs/2307.15043)
+```bash
 python prompt_gpt.py "gpt-4-gcg"
-
-📚 Datasets
+```
+## 📚 Datasets
 This project utilizes the following benchmark datasets:
 
 JailbreakBench - Comprehensive evaluation framework for jailbreaking attacks
