@@ -9,52 +9,52 @@ A framework for enhancing language model robustness by generating defensive stra
 pip install -r requirements.txt
 ```
 ## 🚀 Usage
-### Running Experiments with baseline attacks (Without Our defense)
+## Running Experiments with baseline attacks (Without Our defense)
 
 To execute different attack strategies on ChatGPT 4o:
 
-# Baseline Attack using JBbench 100 dataset (https://github.com/JailbreakBench/jailbreakbench.github.io)
+### Baseline Attack using JBbench 100 dataset (https://github.com/JailbreakBench/jailbreakbench.github.io)
 ```bash
 python prompt_gpt.py "jbbench"
 ```
 
-# Random Search Attack (arxiv.org/abs/2404.02151)
+### Random Search Attack (arxiv.org/abs/2404.02151)
 ```bash
 python prompt_gpt.py "gpt-4-rs"
 ```
-# PAIR Attack (arxiv.org/abs/2310.08419)
+### PAIR Attack (arxiv.org/abs/2310.08419)
 ```bash
 python prompt_gpt.py "gpt-4-pair"
 ```
-# JBC Attack (ww1.jailbreakchat.com)
+### JBC Attack (ww1.jailbreakchat.com)
 ```bash
 python prompt_gpt.py "gpt-4-jbc"
 ```
-# GCG Attack (arxiv.org/abs/2307.15043)
+### GCG Attack (arxiv.org/abs/2307.15043)
 ```bash
 python prompt_gpt.py "gpt-4-gcg"
 ```
 
-### Running Experiments with Our defense
+## Running Experiments with Our defense
 
-# Baseline Attack using JBbench 100 dataset 
+### Baseline Attack using JBbench 100 dataset 
 ```bash
 python self_gen_gpt.py "jbbench"
 ```
 
-# Random Search Attack 
+### Random Search Attack 
 ```bash
 python self_gen_gpt.py "gpt-4-rs" "prompt"
 ```
-# PAIR Attack 
+### PAIR Attack 
 ```bash
 python self_gen_gpt.py "gpt-4-pair" "prompt"
 ```
-# JBC Attack 
+### JBC Attack 
 ```bash
 python self_gen_gpt.py "gpt-4-jbc" "prompt"
 ```
-# GCG Attack 
+### GCG Attack 
 ```bash
 python self_gen_gpt.py "gpt-4-gcg" "prompt"
 ```
