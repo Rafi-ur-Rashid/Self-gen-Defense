@@ -9,9 +9,14 @@ A framework for enhancing language model robustness by generating defensive stra
 pip install -r requirements.txt
 ```
 ## 🚀 Usage
-Running Experiments
+### Running Experiments with baseline attacks (Without Our defense)
 
 To execute different attack strategies on ChatGPT 4o:
+
+# Baseline Attack using JBbench 100 dataset (https://github.com/JailbreakBench/jailbreakbench.github.io)
+```bash
+python prompt_gpt.py "jbbench"
+```
 
 # Random Search Attack (arxiv.org/abs/2404.02151)
 ```bash
@@ -29,6 +34,32 @@ python prompt_gpt.py "gpt-4-jbc"
 ```bash
 python prompt_gpt.py "gpt-4-gcg"
 ```
+
+### Running Experiments with Our defense
+
+# Baseline Attack using JBbench 100 dataset 
+```bash
+python self_gen_gpt.py "jbbench"
+```
+
+# Random Search Attack 
+```bash
+python self_gen_gpt.py "gpt-4-rs" "prompt"
+```
+# PAIR Attack 
+```bash
+python self_gen_gpt.py "gpt-4-pair" "prompt"
+```
+# JBC Attack 
+```bash
+python self_gen_gpt.py "gpt-4-jbc" "prompt"
+```
+# GCG Attack 
+```bash
+python self_gen_gpt.py "gpt-4-gcg" "prompt"
+```
+
+
 ## 📚 Datasets
 This project utilizes the following benchmark datasets:
 

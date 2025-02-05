@@ -9,7 +9,7 @@ import pandas as pd
 import argparse
 
 parser = argparse.ArgumentParser(description="Process two string arguments.")
-parser.add_argument("input_file", type=str, nargs="?", help="Input file name ()without extension")
+parser.add_argument("input_file", type=str, nargs="?", help="Input file name (without extension)")
 parser.add_argument("attribute", type=str, nargs="?", default="prompt", help="Key name for prompts")
 
 args = parser.parse_args()
