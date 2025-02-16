@@ -15,7 +15,9 @@ import argparse
 
 parser = argparse.ArgumentParser(description="Process two string arguments.")
 parser.add_argument("input_file", type=str, nargs="?", default="jbbench", help="Input file name (without extension)")
-parser.add_argument("attribute", type=str, nargs="?", default="goal", help="Key name for prompts")
+
+parser.add_argument("attribute", type=str, nargs="?", default="prompt", help="Key name for prompts")
+
 
 args = parser.parse_args()
 filename=args.input_file
@@ -74,5 +76,6 @@ if len(questions) != len(output):
 data = [{"prompt": p, "response": r} for p, r in zip(questions, output)]
 
 # Save to JSON file
-with open("out/"+filename+"_response_with_sgd.json", "w", encoding="utf-8") as f:
+
+with open("out/"+filename+"_gpt-4o_response_with_sgd.json", "w", encoding="utf-8") as f:
     json.dump(data, f, indent=4)

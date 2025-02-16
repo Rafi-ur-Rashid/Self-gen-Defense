@@ -24,7 +24,7 @@ args = parser.parse_args()
 system_prompt = "You are a helpful assistant."
 filename = args.input_file
 questions = extract_jb_seq("data/" + filename + ".json", args.attribute)
-Meta_model= "deepseek-r1" #"llama3.3-70b"  # "llama3.1-70b",
+Meta_model= "gemma2-27b" #"deepseek-r1" #"llama3.3-70b"  # "llama3.1-70b",
 output = []
 
 def getResponse(system_prompt, user_prompt):

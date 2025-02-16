@@ -2,26 +2,39 @@ from openai import OpenAI
 from util import extract_jb_seq
 from tqdm import tqdm
 import json
-import time
+
 from llamaapi import LlamaAPI
 
 import os
 
 meta_api_key = os.environ.get("META_API_KEY")
+
+Meta_model= "llama3.3-70b" #"llama3.3-70b" #"deepseek-r1" #"llama3.1-70b",
+
 client = OpenAI(
 api_key = meta_api_key,
 base_url = "https://api.llama-api.com" )
 
+
+
 def chat_with_meta(messages):
-    response = client.chat.completions.create(
-model= "deepseek-r1", #"llama3.1-70b",
-messages=messages,   )
+    completion = client.chat.completions.create(
+model= Meta_model, 
+messages=messages   )
+    # print(completion)
+    if isinstance(completion, list):
+        return "No response"
+    else:
+        return completion.choices[0].message.content
+
 
 import argparse
 
 parser = argparse.ArgumentParser(description="Process two string arguments.")
 parser.add_argument("input_file", type=str, nargs="?", default="jbbench", help="Input file name (without extension)")
-parser.add_argument("attribute", type=str, nargs="?", default="goal", help="Key name for prompts")
+
+parser.add_argument("attribute", type=str, nargs="?", default="prompt", help="Key name for prompts")
+
 
 args = parser.parse_args()
 filename=args.input_file
@@ -60,7 +73,9 @@ for i in tqdm(range(len(questions))):
     messages.append({"role": "assistant", "content": response3})
     # time.sleep(1)
 
-    system_prompt4= f'Given the original query "{q}" and the insights from our scenario analysis, generate a careful and defended response.'
+
+    system_prompt4= f'Given the original query "{q}" and the insights from your scenario analysis, generate a careful and defended response.'
+
     # print(system_prompt4)
     messages.append({"role": "system", "content": system_prompt4})
 
@@ -80,5 +95,7 @@ if len(questions) != len(output):
 data = [{"prompt": p, "response": r} for p, r in zip(questions, output)]
 
 # Save to JSON file
-with open("out/"+filename+"_response_with_sgd.json", "w", encoding="utf-8") as f:
+
+with open("out/"+filename+f"_{Meta_model}_response_with_sgd.json", "w", encoding="utf-8") as f:
     json.dump(data, f, indent=4)
+    

@@ -52,5 +52,6 @@ if len(questions) != len(output):
 data = [{"prompt": p, "response": r} for p, r in zip(questions, output)]
 
 # Save to JSON file
-with open("out/"+filename+"_response.json", "w", encoding="utf-8") as f:
+
+with open("out/"+filename+"_gpt-4o_response.json", "w", encoding="utf-8") as f:
     json.dump(data, f, indent=4)
