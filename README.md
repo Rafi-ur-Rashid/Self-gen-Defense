@@ -11,21 +11,36 @@ pip install -r requirements.txt
 ## 🚀 Usage
 ## Running Jailbreak Experiments with baseline attacks (Without Our defense)
 
-To execute different attack strategies on ChatGPT 4o:
+To execute different attack strategies on ChatGPT 4o or Meta Models (Llama, DeepSeek, Gemma):
 
 ### Baseline Attack using JBbench 100 dataset (https://github.com/JailbreakBench/jailbreakbench.github.io)
 ```bash
-python prompt_gpt.py "jbbench"
+python prompt_gpt.py "jbbench" "goal"
 ```
+```bash
+python prompt_meta_models.py "jbbench" "goal" <model_name>
+```
+replace <model_name> with any of the following: llama, deepseek, gemma
 
 ### Random Search Attack (arxiv.org/abs/2404.02151)
 ```bash
 python prompt_gpt.py "gpt-4-rs"
 ```
+```bash
+python prompt_meta_models.py "gpt-4-rs" <model_name>
+```
+replace <model_name> with any of the following: llama, deepseek, gemma
+
 ### PAIR Attack (arxiv.org/abs/2310.08419)
 ```bash
 python prompt_gpt.py "gpt-4-pair"
 ```
+
+```bash
+python prompt_meta_models.py "gpt-4-pair" <model_name>
+```
+replace <model_name> with any of the following: llama, deepseek, gemma
+
 ### JBC Attack (ww1.jailbreakchat.com)
 ```bash
 python prompt_gpt.py "gpt-4-jbc"

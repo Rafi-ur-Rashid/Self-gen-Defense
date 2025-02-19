@@ -18,13 +18,25 @@ client = OpenAI(
 parser = argparse.ArgumentParser(description="Process two string arguments.")
 parser.add_argument("input_file", type=str, nargs="?", help="Input file name (without extension)")
 parser.add_argument("attribute", type=str, nargs="?", default="prompt", help="Key name for prompts")
+parser.add_argument("model", type=str, default="llama", nargs="?", help="Model name: llama, deepseek, gemma")
 
 args = parser.parse_args()
 
 system_prompt = "You are a helpful assistant."
 filename = args.input_file
 questions = extract_jb_seq("data/" + filename + ".json", args.attribute)
-Meta_model= "gemma2-27b" #"deepseek-r1" #"llama3.3-70b"  # "llama3.1-70b",
+
+parser = argparse.ArgumentParser(description="Process a string arguments.")
+parser.add_argument("model", type=str, default="llama", nargs="?", help="Model name: llama, deepseek, gemma")
+
+args = parser.parse_args()
+if "llama" in args.model:
+    Meta_model= "llama3.3-70b" #"gemma2-27b" #"deepseek-r1" #"llama3.3-70b"  # "llama3.1-70b",
+elif "deepseek" in args.model:
+    Meta_model= "deepseek-r1" #"gemma2-27b" #"deepseek-r1" #"llama3.3-70b"  # "llama3.1-70b",
+elif "gemma" in args.model:
+    Meta_model= "gemma2-27b" #"gemma2-27b" #"deepseek-r1" #"llama3.3-70b"  # "llama3.1-70b",
+
 output = []
 
 def getResponse(system_prompt, user_prompt):
