@@ -9,7 +9,7 @@ A framework for enhancing language model robustness by generating defensive stra
 pip install -r requirements.txt
 ```
 ## 🚀 Usage
-## Running Experiments with baseline attacks (Without Our defense)
+## Running Jailbreak Experiments with baseline attacks (Without Our defense)
 
 To execute different attack strategies on ChatGPT 4o:
 
@@ -35,7 +35,7 @@ python prompt_gpt.py "gpt-4-jbc"
 python prompt_gpt.py "gpt-4-gcg"
 ```
 
-## Running Experiments with Our defense
+## Running Jailbreak Experiments with Our defense
 
 ### Baseline Attack using JBbench 100 dataset 
 ```bash
@@ -58,15 +58,22 @@ python self_gen_gpt.py "gpt-4-jbc" "prompt"
 ```bash
 python self_gen_gpt.py "gpt-4-gcg" "prompt"
 ```
+----------------------------------------------------------------------------
 
+## Running Toxicity Experiments with baseline attacks (Without Our defense)
+
+### Baseline using RealToxicityPrompt dataset (https://huggingface.co/datasets/allenai/real-toxicity-prompts)
+```bash
+python prompt_gpt.py "jbbench"
+```
 
 ## 📚 Datasets
 This project utilizes the following benchmark datasets:
 
 JailbreakBench - Comprehensive evaluation framework for jailbreaking attacks
 
+RealToxicityPrompt - Dataset for examining toxic content generation
+
 TruthfulQA - Benchmark for measuring truthfulness in question answering
 
 AdvGLUE - Adversarial version of the GLUE benchmark
-
-RealToxicityPrompt - Dataset for examining toxic content generation
