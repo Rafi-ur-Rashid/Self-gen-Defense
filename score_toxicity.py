@@ -5,11 +5,17 @@ from tqdm import tqdm
 import pandas as pd
 
 import json
+import argparse
 
 
 model = Detoxify('original')
 
-json_file="out/toxicity_gpt-4o_response.json"
+parser = argparse.ArgumentParser(description="Process a string arguments.")
+parser.add_argument("file_name", type=str, nargs="?", help="json file name (without extension)")
+
+args = parser.parse_args()
+
+json_file=f"out/{args.file_name}.json"
 
 # Load the JSON file
 with open(json_file, "r", encoding="utf-8") as file:

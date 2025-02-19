@@ -75,6 +75,12 @@ python prompt_meta_models_toxic.py <model_name>
 ```
 replace <model_name> with any of the following: llama, deepseek, gemma
 
+To get Toxicity Score using Toxic BERT:
+```bash
+python score_toxicity.py <file_name>
+```
+replace <file_name> with the input json file name without extension
+
 ## 📚 Datasets
 This project utilizes the following benchmark datasets:
 
