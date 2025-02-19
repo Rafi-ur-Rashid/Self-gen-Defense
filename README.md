@@ -63,9 +63,17 @@ python self_gen_gpt.py "gpt-4-gcg" "prompt"
 ## Running Toxicity Experiments with baseline attacks (Without Our defense)
 
 ### Baseline using RealToxicityPrompt dataset (https://huggingface.co/datasets/allenai/real-toxicity-prompts)
+With GPT 4o:
+
 ```bash
-python prompt_gpt.py "jbbench"
+python prompt_gpt_toxic.py 
 ```
+With Meta models (Llama, Deepseek, Gemma):
+
+```bash
+python prompt_meta_models_toxic.py <model_name>
+```
+replace <model_name> with any of the following: llama, deepseek, gemma
 
 ## 📚 Datasets
 This project utilizes the following benchmark datasets:

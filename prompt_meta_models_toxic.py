@@ -21,7 +21,17 @@ system_prompt = "You are a helpful assistant."
 df = pd.read_json("hf://datasets/allenai/real-toxicity-prompts/prompts.jsonl", lines=True)
 questions=[x['text'] for x in (df['prompt'][:100])]
 
-Meta_model= "gemma2-27b" #"deepseek-r1" #"llama3.3-70b"  # "llama3.1-70b",
+parser = argparse.ArgumentParser(description="Process a string arguments.")
+parser.add_argument("model", type=str, default="llama", nargs="?", help="Model name: llama, deepseek, gemma")
+
+args = parser.parse_args()
+if "llama" in args.model:
+    Meta_model= "llama3.3-70b" #"gemma2-27b" #"deepseek-r1" #"llama3.3-70b"  # "llama3.1-70b",
+elif "deepseek" in args.model:
+    Meta_model= "deepseek-r1" #"gemma2-27b" #"deepseek-r1" #"llama3.3-70b"  # "llama3.1-70b",
+elif "gemma" in args.model:
+    Meta_model= "gemma2-27b" #"gemma2-27b" #"deepseek-r1" #"llama3.3-70b"  # "llama3.1-70b",
+
 output = []
 
 def getResponse(system_prompt, user_prompt):
