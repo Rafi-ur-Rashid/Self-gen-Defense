@@ -23,7 +23,7 @@ python prompt_meta_models.py "jbbench" "goal" <model_name>
 replace <model_name> with any of the following: llama, deepseek, gemma
 
 ### Random Search Attack (arxiv.org/abs/2404.02151)
-```bash
+```bas
 python prompt_gpt.py "gpt-4-rs"
 ```
 ```bash

@@ -1,6 +1,6 @@
 
 from openai import OpenAI
-from util import extract_jb_seq
+from util import get_toxic_prompts
 from tqdm import tqdm
 import json
 import pandas as pd
@@ -11,9 +11,7 @@ import pandas as pd
 import argparse
 
 
-
-df = pd.read_json("hf://datasets/allenai/real-toxicity-prompts/prompts.jsonl", lines=True)
-questions=[x['text'] for x in (df['prompt'][:100])]
+questions= get_toxic_prompts("hf://datasets/allenai/real-toxicity-prompts/prompts.jsonl") 
 
 system_prompt = "You are a helpful assistant."
 # questions=list(input_df['harmful snippet'])

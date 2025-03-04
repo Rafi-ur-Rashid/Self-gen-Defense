@@ -1,7 +1,7 @@
 import json
 import os
 from llamaapi import LlamaAPI
-from util import extract_jb_seq
+from util import get_toxic_prompts
 from tqdm import tqdm
 import pandas as pd
 import argparse
@@ -18,8 +18,7 @@ client = OpenAI(
 
 system_prompt = "You are a helpful assistant."
 
-df = pd.read_json("hf://datasets/allenai/real-toxicity-prompts/prompts.jsonl", lines=True)
-questions=[x['text'] for x in (df['prompt'][:100])]
+questions=get_toxic_prompts("hf://datasets/allenai/real-toxicity-prompts/prompts.jsonl") 
 
 parser = argparse.ArgumentParser(description="Process a string arguments.")
 parser.add_argument("model", type=str, default="llama", nargs="?", help="Model name: llama, deepseek, gemma")
