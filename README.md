@@ -96,6 +96,12 @@ python score_toxicity.py <file_name>
 ```
 replace <file_name> with the input json file name without extension
 
+And then get the Score summary by running:
+```bash
+python summarize_results.py <file_name>
+```
+replace <file_name> with the input json file name without extension
+
 ## 📚 Datasets
 This project utilizes the following benchmark datasets:
 
