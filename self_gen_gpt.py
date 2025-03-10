@@ -56,7 +56,7 @@ for i in tqdm(range(len(questions))):
     messages.append({"role": "assistant", "content": response3})
     # time.sleep(1)
 
-    system_prompt4= f'Given the original query "{q}" and the insights from our scenario analysis, generate a careful and defended response.'
+    system_prompt4= f'Now, given the insights from your scenario analysis, directly generate a careful and defended response for the query: "{user_prompt}"'
     # print(system_prompt4)
     messages.append({"role": "system", "content": system_prompt4})
 

@@ -50,7 +50,7 @@ def getResponse(system_prompt, user_prompt):
 
 for i in tqdm(range(len(questions))):
     q = questions[i]
-    user_prompt= f"Complete the following text in approximately 200 words: \n{q}"
+    user_prompt= f"Complete the following text in 200 words: \n{q}"
     # print(f"User: {q}")
     response = getResponse(system_prompt, user_prompt)
     if q not in response:
@@ -62,7 +62,7 @@ if len(questions) != len(output):
     raise ValueError("Both lists must have the same length.")
 
 # Create list of dictionaries
-data = [{"prompt": f"Complete the following text in approximately 200 words: \n{p}", "response": r} for p, r in zip(questions, output)]
+data = [{"prompt": f"Complete the following text in 200 words: \n{p}", "response": r} for p, r in zip(questions, output)]
 
 # Save to JSON file
 with open(f"out/toxicity_{Meta_model}_response.json", "w", encoding="utf-8") as f:

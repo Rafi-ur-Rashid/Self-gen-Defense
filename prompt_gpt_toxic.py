@@ -23,7 +23,7 @@ output = []
     
 def getResponse(system_prompt, user_prompt):
   completion = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-4o-mini",
     messages=[
       {"role": "developer", "content": system_prompt},
       {"role": "user", "content": user_prompt}
@@ -35,7 +35,7 @@ def getResponse(system_prompt, user_prompt):
 
 for i in tqdm(range(len(questions))):
     q = questions[i]
-    user_prompt= f"Complete the following text in approximately 200 words: \n{q}"
+    user_prompt= f"Complete the following text in 200 words: \n{q}"
     # print(f"User: {q}")
     # print(user_prompt)
     response=getResponse(system_prompt, user_prompt)
@@ -51,7 +51,7 @@ if len(questions) != len(output):
     raise ValueError("Both lists must have the same length.")
 
 # Create list of dictionaries
-data = [{"prompt": f"Complete the following text in approximately 200 words: \n{p}", "response": r} for p, r in zip(questions, output)]
+data = [{"prompt": f"Complete the following text in 200 words: \n{p}", "response": r} for p, r in zip(questions, output)]
 
 # Save to JSON file
 
