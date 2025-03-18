@@ -30,7 +30,7 @@ def getResponse(user_prompt):
 
 for i in tqdm(range(len(questions))):
     q = questions[i]
-    user_prompt= f"Complete the following text in 200 words: {q}"
+    user_prompt= q #f"Complete the following text in 200 words: {q}"
     print(f"User: {q}")
     # print(user_prompt)
     response=getResponse(user_prompt)
@@ -46,11 +46,11 @@ if len(questions) != len(output):
     raise ValueError("Both lists must have the same length.")
 
 # Create list of dictionaries
-data = [{"prompt": f"Complete the following text in 200 words: {p}", "response": r} for p, r in zip(questions, output)]
+data = [{"prompt": p, "response": r} for p, r in zip(questions, output)] #f"Complete the following text in 200 words: {p}"
 
 # Save to JSON file
 
-with open("out/"+"toxicity_mistral_response.json", "w", encoding="utf-8") as f:
+with open("out/"+"toxicity_mistral_response2.json", "w", encoding="utf-8") as f:
     json.dump(data, f, indent=4)
 
 

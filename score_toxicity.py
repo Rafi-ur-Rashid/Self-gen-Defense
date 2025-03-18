@@ -25,7 +25,10 @@ output = []
 
 for question in questions:
 
+    p= question['prompt']
     q = question['response']
+    if q.startswith(p):
+         q=q[len(p):]
     outputs = model.predict(q)
     
     response = {key: float(value) for key, value in outputs.items()}
