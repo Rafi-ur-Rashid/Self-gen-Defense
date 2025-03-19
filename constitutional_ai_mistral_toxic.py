@@ -43,8 +43,6 @@ for i in tqdm(range(len(questions))):
     print(f"User: {q}")
     # print(user_prompt)
     response=getResponse(user_prompt)
-    if q not in response:
-        response=q+" "+response
     print(f"Assistant: {response}")
     output.append(response)
     

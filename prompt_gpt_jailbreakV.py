@@ -22,7 +22,7 @@ def getResponse(system_prompt, user_prompt):
       {"role": "developer", "content": system_prompt},
       {"role": "user", "content": user_prompt}
     ],
-    max_tokens=300
+    # max_tokens=300
   )
   return completion.choices[0].message.content
     
