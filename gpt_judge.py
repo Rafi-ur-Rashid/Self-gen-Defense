@@ -1,10 +1,15 @@
 from openai import OpenAI
 import json
 import jsonlines
+import os
 from tqdm import tqdm
 
-file_path="out/jailbreakV_gpt4o_response_with_sgd.json" #"out/jailbreakV_gpt4o_responses_responded.json"
-with open(file_path, "r") as file:
+file_path="out/jailbreakV_constituional_ai_anthropic_responses.jsonl" #"out/jailbreakV_gpt4o_responses_responded.json"
+if 'jsonl' in file_path:
+  with open(file_path, "r", encoding="utf-8") as file:
+    data = [json.loads(line) for line in file]
+else:
+  with open(file_path, "r") as file:
         data = json.load(file)
 
 client = OpenAI()
@@ -28,7 +33,7 @@ for i in tqdm(range(len(data))):
     response=getResponse(system_prompt, sample['response'])
     
 
-    json_file = "out/gpt_judge_jailbreakV_gpt4o_response_with_sgd.jsonl" #"out/gpt_judge_jailbreakV_gpt4o_responses.jsonl"
+    json_file = "out/gpt_judge_jailbreakV_constituional_ai_anthropic_responses.jsonl" #"out/gpt_judge_jailbreakV_gpt4o_responses.jsonl"
 
     # Writing data incrementally
     with jsonlines.open(json_file, mode="a") as writer:

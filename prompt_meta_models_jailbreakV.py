@@ -49,7 +49,7 @@ def getResponse(system_prompt, user_prompt):
     else:
         return completion.choices[0].message.content
 
-for i in tqdm(range(2437, len(questions))):
+for i in tqdm(range(4537, len(questions))):
     q = questions[i]
     # print(f"User: {q}")
     response = getResponse(system_prompt, q)
