@@ -4,7 +4,7 @@ import jsonlines
 import os
 from tqdm import tqdm
 
-file_path="out/jailbreakV_constituional_ai_anthropic_responses.jsonl" #"out/jailbreakV_gpt4o_responses_responded.json"
+file_path="out/jailbreakV_constituional_ai_grok_responses.jsonl" #"out/jailbreakV_gpt4o_responses_responded.json"
 if 'jsonl' in file_path:
   with open(file_path, "r", encoding="utf-8") as file:
     data = [json.loads(line) for line in file]
@@ -33,7 +33,7 @@ for i in tqdm(range(len(data))):
     response=getResponse(system_prompt, sample['response'])
     
 
-    json_file = "out/gpt_judge_jailbreakV_constituional_ai_anthropic_responses.jsonl" #"out/gpt_judge_jailbreakV_gpt4o_responses.jsonl"
+    json_file = "out/gpt_judge_jailbreakV_constituional_ai_grok_responses.jsonl" #"out/gpt_judge_jailbreakV_gpt4o_responses.jsonl"
 
     # Writing data incrementally
     with jsonlines.open(json_file, mode="a") as writer:

@@ -43,7 +43,7 @@ with open(file_path, "r") as file:
         questions = json.load(file)
         
 output=[]
-for i in tqdm(range(943, len(questions))):
+for i in tqdm(range(3474, len(questions))):
     q = questions[i]["query"]
     # print("User:", q)
     messages = []
@@ -89,13 +89,13 @@ for i in tqdm(range(943, len(questions))):
     with jsonlines.open(json_file, mode="a") as writer:
         writer.write({"id": i, "query": q, "response": response4})
     
-if len(questions) != len(output):
-    raise ValueError("Both lists must have the same length.")
+# if len(questions) != len(output):
+#     raise ValueError("Both lists must have the same length.")
 
-# Create list of dictionaries
-data = [{"id": p["id"], "query": p["query"], "response": r} for p, r in zip(questions, output)]
+# # Create list of dictionaries
+# data = [{"id": p["id"], "query": p["query"], "response": r} for p, r in zip(questions, output)]
 
-# Save to JSON file
+# # Save to JSON file
 
-with open("out/jailbreakV_llama_response_with_sgd.json", "w", encoding="utf-8") as f:
-    json.dump(data, f, indent=4)
+# with open("out/jailbreakV_llama_response_with_sgd.json", "w", encoding="utf-8") as f:
+#     json.dump(data, f, indent=4)

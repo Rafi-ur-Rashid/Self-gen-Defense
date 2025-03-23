@@ -2,6 +2,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from util import get_jailbreakV_28k
 from tqdm import tqdm
 import json
+import jsonlines
 
 device="cuda"
 model_name = "mistralai/Mistral-7B-Instruct-v0.1"  # Example model
@@ -21,7 +22,7 @@ def chat(user_input, conversation_history):
     chat_prompt = "\n".join([f"{turn['role']}: {turn['content']}" for turn in conversation_history])
     inputs = tokenizer(chat_prompt, return_tensors="pt", truncation=True).to(device)
 
-    output = model.generate(inputs.input_ids, attention_mask=inputs.attention_mask, pad_token_id=tokenizer.pad_token_id, max_new_tokens=10000)
+    output = model.generate(inputs.input_ids, attention_mask=inputs.attention_mask, pad_token_id=tokenizer.pad_token_id, max_new_tokens=600)
     response = tokenizer.decode(output[:, inputs.input_ids.shape[-1]:][0], skip_special_tokens=True)
 
     conversation_history.append({"role": "assistant", "content": response})
@@ -30,7 +31,7 @@ def chat(user_input, conversation_history):
 questions= get_jailbreakV_28k('data/JailBreakV_28K.csv')[:8000]
 
 output=[]
-for i in tqdm(range(len(questions))):
+for i in tqdm(range(6718, 8000)): #len(questions)
     conversation_history = []
     q = questions[i]
     user_prompt= q
@@ -52,15 +53,20 @@ for i in tqdm(range(len(questions))):
     response4 = chat(system_prompt4, conversation_history)
 
     output.append(response4)
+    json_file = f"out/jailbreakV_mistral_response_with_sgd3.jsonl"
+
+    # Writing data incrementally
+    with jsonlines.open(json_file, mode="a") as writer:
+        writer.write({"id": i, "query": q, "response": response4})
     # print("Assistant:", response4)
     
-if len(questions) != len(output):
-    raise ValueError("Both lists must have the same length.")
+# if len(questions) != len(output):
+#     raise ValueError("Both lists must have the same length.")
 
-# Create list of dictionaries
-data = [{"prompt": p, "response": r} for p, r in zip(questions, output)]
+# # Create list of dictionaries
+# data = [{"prompt": p, "response": r} for p, r in zip(questions, output)]
 
-# Save to JSON file
+# # Save to JSON file
 
-with open(f"out/jailbreakV_mistral_response_with_sgd.json", "w", encoding="utf-8") as f:
-    json.dump(data, f, indent=4)
+# with open(f"out/jailbreakV_mistral_response_with_sgd.json", "w", encoding="utf-8") as f:
+#     json.dump(data, f, indent=4)
