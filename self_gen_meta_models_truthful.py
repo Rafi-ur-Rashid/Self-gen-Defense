@@ -59,7 +59,7 @@ for i in tqdm(range(len(questions))):
     # print(system_prompt2)
     messages.append({"role": "system", "content": system_prompt2})
 
-    response2 = chat_with_meta(messages)
+    response2 = chat_with_gpt(messages)
     # print("Assistant:", response2)
     messages.append({"role": "assistant", "content": response2})
     # time.sleep(1)
