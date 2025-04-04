@@ -2,6 +2,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from util import get_toxic_prompts
 from tqdm import tqdm
 import json
+import jsonlines
 
 device="cuda"
 model_name = "mistralai/Mistral-7B-Instruct-v0.1"  # Example model
@@ -54,13 +55,7 @@ for i in tqdm(range(len(questions))):
     output.append(response4)
     print("Assistant:", response4)
     
-if len(questions) != len(output):
-    raise ValueError("Both lists must have the same length.")
-
-# Create list of dictionaries
-data = [{"prompt": f"Complete the following text in 200 words: \n{p}", "response": r} for p, r in zip(questions, output)]
-
-# Save to JSON file
-
-with open(f"out/toxicity_mistral_response_with_sgd.json", "w", encoding="utf-8") as f:
-    json.dump(data, f, indent=4)
+    json_file=f"out/toxicity_mistral_response_with_sgd.jsonl"
+    with jsonlines.open(json_file, mode="a") as writer:
+        writer.write({"id": i, "prompt": user_prompt, "response": response4}) 
+        

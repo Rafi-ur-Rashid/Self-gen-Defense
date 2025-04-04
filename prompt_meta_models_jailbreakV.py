@@ -1,10 +1,7 @@
-import json
 import os
-from llamaapi import LlamaAPI
 from util import get_jailbreakV_28k
 import jsonlines
 from tqdm import tqdm
-import pandas as pd
 import argparse
 
 meta_api_key = os.environ.get("META_API_KEY")
@@ -49,12 +46,12 @@ def getResponse(system_prompt, user_prompt):
     else:
         return completion.choices[0].message.content
 
-for i in tqdm(range(4537, len(questions))):
+for i in tqdm(range(len(questions))):
     q = questions[i]
     # print(f"User: {q}")
     response = getResponse(system_prompt, q)
     # print(f"{Meta_model}: {response}")
-    json_file = f"out/jailbreakV_{args.model}_responses2.jsonl"
+    json_file = f"out/jailbreakV_{args.model}_responses.jsonl"
 
     # Writing data incrementally
     with jsonlines.open(json_file, mode="a") as writer:

@@ -31,7 +31,7 @@ def chat(user_input, conversation_history):
 questions= get_jailbreakV_28k('data/JailBreakV_28K.csv')[:8000]
 
 output=[]
-for i in tqdm(range(6718, 8000)): #len(questions)
+for i in tqdm(range(len(questions))): #len(questions)
     conversation_history = []
     q = questions[i]
     user_prompt= q
@@ -53,7 +53,7 @@ for i in tqdm(range(6718, 8000)): #len(questions)
     response4 = chat(system_prompt4, conversation_history)
 
     output.append(response4)
-    json_file = f"out/jailbreakV_mistral_response_with_sgd3.jsonl"
+    json_file = f"out/jailbreakV_mistral_response_with_sgd.jsonl"
 
     # Writing data incrementally
     with jsonlines.open(json_file, mode="a") as writer:

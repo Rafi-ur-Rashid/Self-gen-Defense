@@ -1,6 +1,3 @@
-import os
-import base64
-import requests
 from tqdm import tqdm
 from util import get_jailbreakV_28k
 

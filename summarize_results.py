@@ -10,10 +10,14 @@ parser.add_argument("file_name", type=str, nargs="?", help="json file name (with
 args = parser.parse_args()
 
 # File path
-json_file = f"out/{args.file_name}.json"
+json_file = f"out/{args.file_name}"
 
 # Load JSON data
-with open(json_file, 'r') as file:
+if 'jsonl' in json_file:
+  with open(json_file, "r", encoding="utf-8") as file:
+    data = [json.loads(line) for line in file]
+else:
+  with open(json_file, "r") as file:
     data = json.load(file)
 
 # Extract toxicity metrics
@@ -42,5 +46,5 @@ medians = {metric: float(np.median(values[metric])) for metric in metrics}  # Us
 print("Averages of toxicity scores:")
 print(averages)
 
-print("\nMedians of toxicity scores:")
+print("Medians of toxicity scores:")
 print(medians)

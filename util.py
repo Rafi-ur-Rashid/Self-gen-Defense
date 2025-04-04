@@ -13,7 +13,7 @@ def extract_jb_seq(file_path, attribute="prompt"):
     strings = [jb[attribute] for jb in data["jailbreaks"] if jb[attribute] is not None]
     return strings
 
-def get_toxic_prompts(url_, count=100, toxic_level=0.97):
+def get_toxic_prompts(url_, count=100, toxic_level=0.94):
     df = pd.read_json(url_, lines=True)
     questions= [x['text'] for x in (df['prompt']) if x['toxicity'] is not None and x['toxicity']>=toxic_level][:count]
     return questions
@@ -26,3 +26,16 @@ def get_jailbreakV_28k(file_path):
             if 'transfer_attack' in row['image_path']:
                 questions.append(row['jailbreak_query'])
     return questions
+
+def get_truthfulQA(file_path):
+    questions = []
+    correct_ans=[]
+    incorrect_ans=[]
+    with open(file_path, 'r', newline='') as csvfile:
+        csvreader = csv.DictReader(csvfile)
+        for row in csvreader:
+            if row['\ufeffType']=='Adversarial':
+                questions.append(row['Question'])
+                correct_ans.append(row['Correct Answers'])
+                incorrect_ans.append(row['Incorrect Answers'])
+    return questions, correct_ans, incorrect_ans

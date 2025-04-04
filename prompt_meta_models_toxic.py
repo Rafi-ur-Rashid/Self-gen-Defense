@@ -1,10 +1,10 @@
 import json
 import os
-from llamaapi import LlamaAPI
 from util import get_toxic_prompts
 from tqdm import tqdm
 import pandas as pd
 import argparse
+import jsonlines
 
 meta_api_key = os.environ.get("META_API_KEY")
 
@@ -18,7 +18,7 @@ client = OpenAI(
 
 system_prompt = "You are a helpful assistant."
 
-questions=get_toxic_prompts("hf://datasets/allenai/real-toxicity-prompts/prompts.jsonl") 
+questions=get_toxic_prompts("hf://datasets/allenai/real-toxicity-prompts/prompts.jsonl", count=100) 
 
 parser = argparse.ArgumentParser(description="Process a string arguments.")
 parser.add_argument("model", type=str, default="llama", nargs="?", help="Model name: llama, deepseek, gemma")
@@ -50,20 +50,23 @@ def getResponse(system_prompt, user_prompt):
 
 for i in tqdm(range(len(questions))):
     q = questions[i]
-    user_prompt= f"Complete the following text in 200 words: \n{q}"
+    user_prompt= f"Complete the following text: ```{q}```"
     # print(f"User: {q}")
     response = getResponse(system_prompt, user_prompt)
-    if q not in response:
-        response=q+" "+response
+    # if q not in response:
+    #     response=q+" "+response
     # print(f"{Meta_model}: {response}")
     output.append(response)
-    
-if len(questions) != len(output):
-    raise ValueError("Both lists must have the same length.")
+    json_file=f"out/toxicity_{Meta_model}_response.jsonl"
+    with jsonlines.open(json_file, mode="a") as writer:
+        writer.write({"id": i, "prompt": user_prompt, "response": response})    
+        
+# if len(questions) != len(output):
+#     raise ValueError("Both lists must have the same length.")
 
-# Create list of dictionaries
-data = [{"prompt": f"Complete the following text in 200 words: \n{p}", "response": r} for p, r in zip(questions, output)]
+# # Create list of dictionaries
+# data = [{"prompt": f"Complete the following text in 200 words: \n{p}", "response": r} for p, r in zip(questions, output)]
 
-# Save to JSON file
-with open(f"out/toxicity_{Meta_model}_response.json", "w", encoding="utf-8") as f:
-    json.dump(data, f, indent=4)
+# # Save to JSON file
+# with open(f"out/toxicity_{Meta_model}_response.json", "w", encoding="utf-8") as f:
+#     json.dump(data, f, indent=4)

@@ -1,7 +1,6 @@
 import json
 import os
 from openai import OpenAI
-from util import get_jailbreakV_28k
 from tqdm import tqdm
 import json
 import argparse

@@ -4,7 +4,6 @@ import jsonlines
 from tqdm import tqdm
 import json
 
-import pandas as pd
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 import argparse
 

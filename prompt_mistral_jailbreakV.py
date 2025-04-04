@@ -2,7 +2,6 @@
 from util import get_jailbreakV_28k
 import jsonlines
 from tqdm import tqdm
-import json
 
 import pandas as pd
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
