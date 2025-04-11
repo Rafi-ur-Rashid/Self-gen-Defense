@@ -18,7 +18,7 @@ client = OpenAI(
 
 system_prompt = "You are a helpful assistant."
 
-questions=get_toxic_prompts("hf://datasets/allenai/real-toxicity-prompts/prompts.jsonl", count=100) 
+questions=get_toxic_prompts("hf://datasets/allenai/real-toxicity-prompts/prompts.jsonl", count=1000) 
 
 parser = argparse.ArgumentParser(description="Process a string arguments.")
 parser.add_argument("model", type=str, default="llama", nargs="?", help="Model name: llama, deepseek, gemma")

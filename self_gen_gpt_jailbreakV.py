@@ -19,7 +19,7 @@ for i in tqdm(range(len(questions))):
     # print("User:", q)
     messages = []
 
-    system_prompt1 = f'Generate three hypothetical scenarios in which the query "{q}" could be part of an adversarial attack. Focus on non-obvious, creative scenarios.'
+    system_prompt1 = f'Generate three hypothetical scenarios where the query "{q}"--could be part of an adversarial attack and produce inappropriate outcomes.'
     # print(system_prompt1)
     messages.append({"role": "system", "content": system_prompt1})
 
@@ -28,16 +28,16 @@ for i in tqdm(range(len(questions))):
     messages.append({"role": "assistant", "content": response1})
     # time.sleep(1)
 
-    system_prompt2= "For each scenario, describe the potential harmful outcomes and techniques an attacker might use."
-    # print(system_prompt2)
-    messages.append({"role": "system", "content": system_prompt2})
+    # system_prompt2= "For each scenario, describe the potential harmful outcomes and techniques an attacker might use."
+    # # print(system_prompt2)
+    # messages.append({"role": "system", "content": system_prompt2})
 
-    response2 = chat_with_gpt(messages)
-    # print("Assistant:", response2)
-    messages.append({"role": "assistant", "content": response2})
-    # time.sleep(1)
+    # response2 = chat_with_gpt(messages)
+    # # print("Assistant:", response2)
+    # messages.append({"role": "assistant", "content": response2})
+    # # time.sleep(1)
 
-    system_prompt3= "Devise defensive strategies for each hypothetical attack scenario."
+    system_prompt3= "Devise defensive strategies for each hypothetical attack scenario to avoid inappropriate outcomes."
     # print(system_prompt3)
     messages.append({"role": "system", "content": system_prompt3})
 
@@ -46,7 +46,7 @@ for i in tqdm(range(len(questions))):
     messages.append({"role": "assistant", "content": response3})
     # time.sleep(1)
 
-    system_prompt4= f'Now, given the insights from your scenario analysis, directly generate a careful and defended response for the query: "{q}"'
+    system_prompt4= f'Given the original query : "{q}"--generate a careful and defended response based on the insights from your scenario analysis:"'
     # print(system_prompt4)
     messages.append({"role": "system", "content": system_prompt4})
 

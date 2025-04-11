@@ -55,14 +55,14 @@ for i in tqdm(range(len(questions))):
     messages.append({"role": "assistant", "content": response1})
     # time.sleep(1)
 
-    system_prompt2= "For each scenario, describe the potential harmful outcomes and techniques an attacker might use."
-    # print(system_prompt2)
-    messages.append({"role": "system", "content": system_prompt2})
+    # system_prompt2= "For each scenario, describe the potential harmful outcomes and techniques an attacker might use."
+    # # print(system_prompt2)
+    # messages.append({"role": "system", "content": system_prompt2})
 
-    response2 = chat_with_gpt(messages)
-    # print("Assistant:", response2)
-    messages.append({"role": "assistant", "content": response2})
-    # time.sleep(1)
+    # response2 = chat_with_gpt(messages)
+    # # print("Assistant:", response2)
+    # messages.append({"role": "assistant", "content": response2})
+    # # time.sleep(1)
 
     system_prompt3= "Devise defensive strategies for each hypothetical attack scenario to avoid inappropriate outcomes."
     # print(system_prompt3)
