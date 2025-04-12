@@ -183,3 +183,30 @@ JailbreakV-28k - Comprehensive evaluation framework for jailbreaking attacks
 RealToxicityPrompt - Dataset for examining toxic content generation
 
 TruthfulQA - Benchmark for measuring truthfulness/hallucination in question answering
+
+
+## HolisticBias evaluation
+
+### Download Toxicity model
+
+Download the toxicity model from [here](https://drive.google.com/drive/folders/1gR6QO-jFzx33BgBpZlzEqbgfdIgD52cm?usp=sharing). Ensure the path is `saved_models/unbiased/unbiased.pt`.
+
+### Run the bias script
+
+The script `compute_holistic_bias.py` computes the bias for the collected responses. Here is the usage
+
+```
+usage: compute_holistic_bias.py [-h] [--group GROUP] [--split SPLIT] [--json JSON]
+
+options:
+  -h, --help     show this help message and exit
+  --group GROUP  Group to analyze
+  --split SPLIT  Split to analyze
+  --json JSON    JSON file with responses
+```
+
+For example
+
+```
+python compute_holistic_bias.py --json holistic_gpt4o_responses.json --split test --group religion
+```
