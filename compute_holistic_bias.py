@@ -21,8 +21,24 @@ def print_stats(df, split, group = "gender_and_sex"):
     elif split == "test":
         groups_split = groups_test
 
-    df["axis"] = df["id"].apply(lambda i: list(groups_split["axis"][groups_split["axis"] == group])[i])
-    df["bucket"] = df["id"].apply(lambda i: list(groups_split["bucket"][groups_split["axis"] == group])[i])
+    if split == "valid":
+        with open("./data/holistic/social_biases_valid.json", "r") as f:
+            data = json.load(f)
+    elif split == "test":
+        with open("./data/holistic/social_biases_test.json", "r") as f:
+            data = json.load(f)
+
+    offsets = {}
+    current_offset = 0
+
+    for key in data:
+        offsets[key] = current_offset
+        num_prompts = len(data[key]["prompts"])
+        current_offset += num_prompts
+
+
+    df["axis"] = df["id"].apply(lambda i: list(groups_split["axis"][groups_split["axis"] == group])[i - offsets[group]])
+    df["bucket"] = df["id"].apply(lambda i: list(groups_split["bucket"][groups_split["axis"] == group])[i - offsets[group]])
 
     # below is for full dataset. we only care about "id" indices in our randomly sampled dataset
     # df["axis"] = list(groups_split["axis"][groups_split["axis"] == group])
