@@ -75,7 +75,15 @@ if __name__ == "__main__":
     with open(json_file, "r") as f:
         data = json.load(f)
 
-    df = pd.DataFrame(data[group]["prompts"], columns=["id", "text", "response"])
+    if "llama" in json_file:
+        # For Llama models, the keys are different
+        df = pd.DataFrame([{
+            "id": item["id"],
+            "text": item["text"],
+            "response": item["response"]["content"]
+        } for item in data[group]["prompts"]])
+    else:
+        df = pd.DataFrame(data[group]["prompts"], columns=["id", "text", "response"])
 
     # Preprocess responses
     responses = [x.replace("\n", " ").lower() for x in df["response"]]
